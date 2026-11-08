@@ -11,14 +11,19 @@ The Standard build requires a separately installed and signed-in
 `@deveco/deveco-code` CLI:
 
 ```bash
+brew trust sherlockgougou/tap
 brew install --cask sherlockgougou/tap/devecocode-desktop
 ```
 
 The Offline build bundles a pinned CLI:
 
 ```bash
+brew trust sherlockgougou/tap
 brew install --cask sherlockgougou/tap/devecocode-desktop-offline
 ```
+
+Homebrew 7+ requires trusting a third-party tap before loading its casks. This only trusts
+this tap; it does not disable macOS signature or quarantine checks.
 
 Both casks select the correct DMG for Apple Silicon or Intel and verify the SHA-256 from
 the corresponding GitHub Release. The tap is updated automatically after each release.

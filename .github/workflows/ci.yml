@@ -19,7 +19,9 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Tap repository
-        run: brew tap sherlockgougou/tap "$GITHUB_WORKSPACE"
+        run: |
+          brew tap sherlockgougou/tap "$GITHUB_WORKSPACE"
+          brew trust sherlockgougou/tap
 
       - name: Audit casks
         run: |
