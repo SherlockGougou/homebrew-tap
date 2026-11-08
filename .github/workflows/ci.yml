@@ -24,6 +24,8 @@ jobs:
           brew trust sherlockgougou/tap
 
       - name: Audit casks
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           brew audit --cask --strict --online \
             devecocode-desktop \
