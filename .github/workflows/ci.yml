@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Audit casks
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Tap repository
+        run: brew tap sherlockgougou/tap "$GITHUB_WORKSPACE"
+
+      - name: Audit casks
+        run: |
+          brew audit --cask --strict --online \
+            devecocode-desktop \
+            devecocode-desktop-offline
+
+      - name: Check style
+        run: brew style Casks

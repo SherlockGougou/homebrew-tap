@@ -1,0 +1,46 @@
+# typed: strict
+# frozen_string_literal: true
+
+cask "devecocode-desktop-offline" do
+  version "0.2.2"
+
+  on_arm do
+    sha256 "f8420dc0656106828b27ff313d61d5f12002be4af0757a1127a0ba8b5e499c72"
+
+    url "https://github.com/SherlockGougou/devecocode-desktop/releases/download/v#{version}/DevEco.Code.Offline_#{version}_aarch64.dmg"
+  end
+  on_intel do
+    sha256 "3fdfdbfec127002959318afe59e9c18c1fabab20f67ee829e4563cd8485796e5"
+
+    url "https://github.com/SherlockGougou/devecocode-desktop/releases/download/v#{version}/DevEco.Code.Offline_#{version}_x64.dmg"
+  end
+
+  name "DevEco Code Offline"
+  desc "DevEco Code desktop client with a bundled CLI"
+  homepage "https://sherlockgougou.github.io/devecocode-desktop/"
+
+  livecheck do
+    url "https://github.com/SherlockGougou/devecocode-desktop/releases/latest"
+    strategy :github_latest
+  end
+
+  depends_on macos: ">= :monterey"
+
+  app "DevEco Code Offline.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.deveco.desktop.offline",
+    "~/Library/Application Support/DevEco Code Desktop",
+    "~/Library/Caches/com.deveco.desktop.offline",
+    "~/Library/HTTPStorages/com.deveco.desktop.offline.binarycookies",
+    "~/Library/Logs/DevEco Code Desktop",
+    "~/Library/Preferences/com.deveco.desktop.offline.plist",
+    "~/Library/WebKit/com.deveco.desktop.offline",
+  ]
+
+  caveats <<~EOS
+    This build is ad-hoc signed and not notarized by Apple.
+    On first launch, right-click the app in Applications and choose Open,
+    or use System Settings > Privacy & Security > Open Anyway.
+  EOS
+end
